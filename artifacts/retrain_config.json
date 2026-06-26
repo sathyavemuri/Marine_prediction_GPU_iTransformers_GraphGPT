@@ -1,0 +1,39 @@
+{
+  "input_features": [
+    "current_speed_ms",
+    "current_direction_deg",
+    "tidal_level_m",
+    "water_temp_c",
+    "salinity_psu",
+    "significant_wave_height_m",
+    "significant_wave_period_s",
+    "conductivity_mscm"
+  ],
+  "output_targets": [
+    "tidal_level_m",
+    "current_speed_ms",
+    "peak_wave_period_s"
+  ],
+  "train_dates": [
+    "2026-02-23 00:00:00",
+    "2026-05-13 23:59:00"
+  ],
+  "val_dates": [
+    "2026-05-14 00:00:00",
+    "2026-06-02 23:59:00"
+  ],
+  "test_dates": [
+    "2026-06-03 00:00:00",
+    "2026-06-09 23:59:00"
+  ],
+  "train_records": 115200,
+  "val_records": 28800,
+  "test_records": 10080,
+  "n_inputs": 8,
+  "n_outputs": 3,
+  "improvements": [
+    "Added conductivity_mscm",
+    "Added peak_wave_period_s",
+    "Proper 3-way split"
+  ]
+}

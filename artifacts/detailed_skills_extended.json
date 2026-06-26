@@ -1,0 +1,171 @@
+{
+  "timestamp": "2026-06-26",
+  "configuration": {
+    "total_parameters": 31,
+    "forecasted": 29,
+    "not_forecasted": 2,
+    "coverage_percent": 94
+  },
+  "itransformer": {
+    "parameter_count": 14,
+    "parameters": {
+      "current_speed_ms": {
+        "day1": 93.1,
+        "day7": 43.8,
+        "avg": 64.9
+      },
+      "current_direction_deg": {
+        "day1": 86.5,
+        "day7": 33.2,
+        "avg": 55.3
+      },
+      "tidal_level_m": {
+        "day1": 97.5,
+        "day7": 52.4,
+        "avg": 71.9
+      },
+      "water_temp_c": {
+        "day1": 90.8,
+        "day7": 39.5,
+        "avg": 61.5
+      },
+      "salinity_psu": {
+        "day1": 95.9,
+        "day7": 48.1,
+        "avg": 69.2
+      },
+      "significant_wave_height_m": {
+        "day1": 99.7,
+        "day7": 60.8,
+        "avg": 78.7
+      },
+      "significant_wave_period_s": {
+        "day1": 99.8,
+        "day7": 61.2,
+        "avg": 78.9
+      },
+      "zero_crossing_period_s": {
+        "day1": 98.8,
+        "day7": 56.9,
+        "avg": 75.8
+      },
+      "water_level_m": {
+        "day1": 92.5,
+        "day7": 43.1,
+        "avg": 64.7
+      },
+      "max_wave_height_m": {
+        "day1": 97.7,
+        "day7": 55.6,
+        "avg": 74.9
+      },
+      "conductivity_mscm": {
+        "day1": 93.4,
+        "day7": 47.9,
+        "avg": 68.6
+      },
+      "peak_wave_period_s": {
+        "day1": 89.2,
+        "day7": 41.5,
+        "avg": 64.2
+      },
+      "water_pressure_dbar": {
+        "day1": 94.5,
+        "day7": 49.2,
+        "avg": 69.8
+      },
+      "tide_pressure_dbar": {
+        "day1": 93.1,
+        "day7": 46.8,
+        "avg": 68.3
+      }
+    },
+    "average_skill_percent": 69.05
+  },
+  "graphcast": {
+    "parameter_count": 15,
+    "parameters": {
+      "air_temp_c": {
+        "day1": 40.2,
+        "day7": 7.8,
+        "avg": 19.2
+      },
+      "air_pressure_hpa": {
+        "day1": 40.1,
+        "day7": 7.7,
+        "avg": 19.1
+      },
+      "relative_humidity_pct": {
+        "day1": 38.5,
+        "day7": 6.9,
+        "avg": 18.7
+      },
+      "dew_point_c": {
+        "day1": 39.0,
+        "day7": 7.0,
+        "avg": 18.9
+      },
+      "wind_speed_ms": {
+        "day1": 37.8,
+        "day7": 7.3,
+        "avg": 18.6
+      },
+      "wind_direction_deg": {
+        "day1": 32.5,
+        "day7": 4.5,
+        "avg": 15.1
+      },
+      "wind_chill_c": {
+        "day1": 35.5,
+        "day7": 5.0,
+        "avg": 16.2
+      },
+      "global_radiation_wm2": {
+        "day1": 45.5,
+        "day7": 18.2,
+        "avg": 30.6
+      },
+      "precip_diff_mm": {
+        "day1": 42.5,
+        "day7": 8.4,
+        "avg": 20.6
+      },
+      "precip_intensity_mmh": {
+        "day1": 41.0,
+        "day7": 7.9,
+        "avg": 19.3
+      },
+      "precip_type": {
+        "day1": 38.5,
+        "day7": 6.6,
+        "avg": 17.9
+      },
+      "visibility_1min_km": {
+        "day1": 45.2,
+        "day7": 12.1,
+        "avg": 26.8
+      },
+      "visibility_10min_km": {
+        "day1": 44.3,
+        "day7": 11.6,
+        "avg": 25.9
+      },
+      "visibility_1hr_km": {
+        "day1": 43.5,
+        "day7": 10.9,
+        "avg": 25.2
+      },
+      "visibility_24hr_km": {
+        "day1": 46.5,
+        "day7": 13.1,
+        "avg": 27.5
+      }
+    },
+    "average_skill_percent": 21.306666666666665
+  },
+  "system": {
+    "day1_average": 66.65862068965517,
+    "day7_average": 28.10344827586207,
+    "average_7day": 44.35517241379311
+  }
+}

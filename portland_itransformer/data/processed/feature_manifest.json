@@ -1,0 +1,139 @@
+{
+  "source_file": "data/raw/portland_harbor_2025_15min_synthetic_calibrated.csv",
+  "dataset_label": "SYNTHETIC - Portland Harbor 2025",
+  "note": "Synthetic data for pipeline testing. Not real NOAA/buoy data.",
+  "num_rows": 35040,
+  "num_features": 19,
+  "target_features": [
+    "air_temp_c",
+    "air_pressure_hpa",
+    "water_temp_c",
+    "dew_point_c",
+    "salinity_psu",
+    "wind_u_east_ms",
+    "wind_v_north_ms",
+    "current_u_east_ms",
+    "current_v_north_ms",
+    "tidal_residual_m",
+    "log_significant_wave_height_m",
+    "log_zero_crossing_period_s",
+    "log_clearness_index"
+  ],
+  "known_features": [
+    "tide_baseline_m",
+    "clear_sky_radiation_wm2",
+    "hour_sin",
+    "hour_cos",
+    "dayofyear_sin",
+    "dayofyear_cos"
+  ],
+  "transforms": {
+    "wind": "speed + direction \u2192 u/v (meteorological convention)",
+    "current": "speed + direction \u2192 u/v (oceanographic convention)",
+    "tide": "residual = observed - UTide baseline",
+    "waves": "log(Hs + eps), log(Tz + eps)",
+    "clearness": "log1p(radiation / max(clear_sky, 20))",
+    "cyclical": "hour_sin/cos, dayofyear_sin/cos"
+  },
+  "scalers": {
+    "target": {
+      "air_temp_c": {
+        "mean": 14.712611033324002,
+        "std": 7.997579864519378
+      },
+      "air_pressure_hpa": {
+        "mean": 1010.1265600672078,
+        "std": 7.997773684616964
+      },
+      "water_temp_c": {
+        "mean": 10.657518902268272,
+        "std": 5.769317178399654
+      },
+      "dew_point_c": {
+        "mean": 10.556050966115935,
+        "std": 8.287405773385125
+      },
+      "salinity_psu": {
+        "mean": 33.90873564827779,
+        "std": 0.2952824463413409
+      },
+      "wind_u_east_ms": {
+        "mean": 4.672807244764206,
+        "std": 4.403583591612752
+      },
+      "wind_v_north_ms": {
+        "mean": 2.8504645717730153,
+        "std": 4.328754562927458
+      },
+      "current_u_east_ms": {
+        "mean": -0.00782863692341485,
+        "std": 0.5610662034799538
+      },
+      "current_v_north_ms": {
+        "mean": -0.003336635866755479,
+        "std": 0.4192594512336542
+      },
+      "tidal_residual_m": {
+        "mean": 0.032823894940296854,
+        "std": 0.8576026617899959
+      },
+      "log_significant_wave_height_m": {
+        "mean": -0.10297897277325145,
+        "std": 0.5085577733725236
+      },
+      "log_zero_crossing_period_s": {
+        "mean": 1.407415289686906,
+        "std": 0.05408305510853775
+      },
+      "log_clearness_index": {
+        "mean": 0.37830830633441825,
+        "std": 0.3673700360648011
+      }
+    },
+    "known": {
+      "tide_baseline_m": {
+        "mean": -0.01608679048776252,
+        "std": 1.0
+      },
+      "clear_sky_radiation_wm2": {
+        "mean": 297.7446108364229,
+        "std": 340.30928905245435
+      },
+      "hour_sin": {
+        "mean": 1.449560599845436e-05,
+        "std": 0.7071239293160556
+      },
+      "hour_cos": {
+        "mean": -5.4098338072808954e-05,
+        "std": 0.7070896304230951
+      },
+      "dayofyear_sin": {
+        "mean": 0.3131423834063212,
+        "std": 0.6371482726017031
+      },
+      "dayofyear_cos": {
+        "mean": -0.5422665211267861,
+        "std": 0.44936727350834893
+      }
+    }
+  },
+  "calibrators": {
+    "conductivity": "f(salinity, water_temp)",
+    "sig_wave_period": "f(log_Tz, log_Hs)",
+    "peak_wave_period": "f(log_Tz, log_Hs)"
+  },
+  "split_ranges": {
+    "train": {
+      "start": "2025-03-01 00:00:00+00:00",
+      "end": "2025-09-02 23:45:00+00:00"
+    },
+    "validation": {
+      "start": "2025-09-03 00:00:00+00:00",
+      "end": "2025-11-01 23:45:00+00:00"
+    },
+    "test": {
+      "start": "2025-11-02 00:00:00+00:00",
+      "end": "2025-12-31 23:45:00+00:00"
+    }
+  }
+}

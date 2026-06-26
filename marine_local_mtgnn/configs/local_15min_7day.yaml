@@ -1,0 +1,91 @@
+experiment_name: local_only_mtgnn_15min_7day_atlantic_real_data
+seed: 42
+timezone: US/Eastern
+output_root: outputs
+
+site:
+  buoy_id: BUOY_ATLANTIC
+  latitude: 40.0           # Atlantic coast, US/Eastern
+  longitude: -70.0
+  altitude_m: 0.0
+  timezone: US/Eastern
+  sea_pressure_dbar: 0.0
+  wind_direction_convention: from    # MUST be confirmed
+  current_direction_convention: to    # MUST be confirmed
+  sensor_depth_m: null
+  wind_sensor_height_m: null
+
+data:
+  raw_csv: D:\Projects_Github\Marine_Prediction\marine_120day_18params_10min.csv
+  resample_rule: 15min
+  resample_label: right
+  resample_closed: right
+
+splits:
+  train_start: "2026-02-23T00:00:00"
+  train_end_exclusive: "2026-05-24T00:00:00"
+  validation_start: "2026-05-24T00:00:00"
+  validation_end_exclusive: "2026-06-13T00:00:00"
+  test_start: "2026-06-13T00:00:00"
+  test_end_exclusive: "2026-06-23T00:00:00"
+
+forecast:
+  profile: long_7day
+  lookback_steps: 672              # 7 days at 15-minute cadence
+  horizon_steps: 672               # direct seven-day forecast
+  sample_stride_steps: 4           # one training origin per hour
+  direct_multi_horizon: true
+
+baselines:
+  persistence: true
+  daily_seasonal: true
+  weekly_seasonal: true
+  local_trend: true
+  trend_window_steps: 12           # local trend window (3 hours)
+  blended: true                    # blend persistence/seasonal
+  tide_enabled: true
+  radiation_enabled: true
+  selection_metric: mae_physical
+  max_lag_graph_steps: 96          # 24 hours at 15-minute cadence
+
+model:
+  num_input_nodes: 19
+  num_direct_targets: 15
+  hidden_channels: 32
+  skip_channels: 64
+  end_channels: 128
+  kernel_size: 3
+  dilation_exponential: 2
+  graph_top_k: 4
+  graph_conv_depth: 2
+  dropout: 0.15
+  max_trainable_parameters: 2000000
+
+decoder:
+  mode: horizon_conditioned_direct
+  target_embedding_dim: 8
+  lead_time_embedding_dim: 16
+  decoder_hidden: 64
+  use_future_baseline: true
+  use_future_calendar: true
+
+training:
+  batch_size: 8
+  num_workers: 2
+  max_epochs: 150
+  early_stopping_patience: 20
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  gradient_clip_norm: 1.0
+  monitor: validation_weighted_physical_mae
+
+postprocess:
+  humidity_formula_enabled: true
+  conductivity_formula_enabled: false  # enable only after validation
+  conductivity_max_validation_mae_mscm: 3.0
+
+service:
+  host: 0.0.0.0
+  port: 8000
+  minimum_history_steps: 672
+  prediction_horizon_steps: 672

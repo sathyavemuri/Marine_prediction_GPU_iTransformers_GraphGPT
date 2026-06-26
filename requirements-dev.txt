@@ -1,0 +1,252 @@
+# Development-only requirements for Marine Forecasting System
+# Install with: pip install -r requirements-dev.txt (after installing requirements.txt)
+
+# ============================================================================
+# Development Tools
+# ============================================================================
+
+# Documentation
+sphinx>=7.0.0
+sphinx-rtd-theme>=2.0.0
+sphinx-autodoc-typehints>=1.25.0
+myst-parser>=2.0.0
+autodoc-pydantic>=2.0.0
+
+# Pre-commit hooks
+pre-commit>=3.6.0
+pre-commit-hooks>=4.5.0
+
+# Git helpers
+gitpython>=3.1.0
+ghapi>=1.0.0
+gh-cli>=1.18.0
+
+# ============================================================================
+# Advanced Testing
+# ============================================================================
+
+# Hypothesis - Property-based testing
+hypothesis>=6.92.0
+
+# Faker - Generate test data
+faker>=22.2.0
+
+# pytest plugins
+pytest-html>=4.1.0
+pytest-json-report>=1.5.0
+pytest-performance>=0.10.0
+pytest-testmon>=2.1.0
+pytest-repeat>=0.9.0
+
+# ============================================================================
+# Code Profiling & Analysis
+# ============================================================================
+
+# Advanced profilers
+pyflame>=0.3.1
+flamegraph>=0.1.1
+py-flamegraph>=1.1.0
+
+# Complexity analysis
+radon>=6.0.0
+vulture>=2.11.0
+dlint>=1.3.0
+
+# Performance benchmarking
+benchmark>=0.1.5
+asv>=0.6.0  # Airspeed Velocity
+
+# ============================================================================
+# Documentation & Notebooks
+# ============================================================================
+
+# Notebook tools
+nbdime>=3.2.0  # Diff and merge Jupyter notebooks
+nbsphinx>=0.9.0  # Sphinx extension for Jupyter
+nbstripout>=0.7.0  # Remove output from notebooks
+jupytext>=1.16.0  # Pair Jupyter notebooks with .py files
+
+# Interactive notebooks
+voila>=0.5.0  # Turn notebooks into standalone web apps
+ipyplot>=1.1.2  # Interactive plots in notebooks
+
+# ============================================================================
+# Debugging in Notebooks
+# ============================================================================
+
+jupyter-contrib-nbextensions>=0.7.0
+jupyter-nbextensions-configurator>=0.6.0
+xeus-python>=0.15.0
+
+# ============================================================================
+# Docker & Containerization (optional)
+# ============================================================================
+
+docker>=7.0.0
+docker-compose>=1.29.0
+
+# ============================================================================
+# Cloud & Model Deployment
+# ============================================================================
+
+# AWS
+boto3>=1.34.0
+sagemaker>=2.201.0
+
+# Google Cloud
+google-cloud-storage>=2.10.0
+google-cloud-bigquery>=3.18.0
+
+# Azure
+azure-storage-blob>=12.19.0
+azure-ai-ml>=1.15.0
+
+# ============================================================================
+# Additional Scientific Tools
+# ============================================================================
+
+# Symbolic math
+sympy>=1.12.0
+sage>=10.3.0
+
+# Optimization advanced
+cvxpy>=1.4.0
+pypopt>=0.1.0
+scipy-optimize-extra>=0.1.0
+
+# ============================================================================
+# Visualization Advanced
+# ============================================================================
+
+# 3D plotting
+plotly-orca>=1.3.0
+vispy>=0.14.0
+mayavi>=4.8.0
+
+# Network graphs
+networkx>=3.2.0
+pyvis>=0.3.2
+
+# ============================================================================
+# Data Science & ML Extras
+# ============================================================================
+
+# Explainability
+shap>=0.44.0
+lime>=0.2.0
+captum>=0.7.0
+
+# Imbalanced data
+imbalanced-learn>=0.12.0
+
+# Feature engineering
+featuretools>=1.27.0
+tsfresh>=0.20.0
+
+# AutoML
+h2o>=3.46.0
+auto-sklearn>=0.15.0
+
+# ============================================================================
+# API Documentation & Testing
+# ============================================================================
+
+# API testing
+httpx>=0.26.0
+requests-mock>=1.11.0
+
+# API docs
+swagger-ui-py>=24.1.0
+redoc>=1.3.0
+
+# ============================================================================
+# Build & Package Management
+# ============================================================================
+
+# Build tools
+build>=1.1.0
+wheel>=0.42.0
+twine>=4.1.0
+setuptools>=69.0.0
+poetry>=1.7.0
+pdm>=2.12.0
+
+# Version management
+bumpversion>=0.6.0
+bump2version>=1.0.1
+
+# ============================================================================
+# CI/CD Helpers
+# ============================================================================
+
+# GitHub Actions
+gha-pytest>=1.0.0
+actions-toolkit>=0.1.0
+
+# GitLab CI
+python-gitlab>=4.4.0
+
+# Jenkins
+python-jenkins>=1.7.0
+
+# ============================================================================
+# Monitoring & Logging (Advanced)
+# ============================================================================
+
+# Logging
+python-json-logger>=2.0.0
+colorlog>=6.8.0
+structlog>=24.1.0
+
+# Monitoring
+sentry-sdk>=1.40.0
+opentelemetry-api>=1.22.0
+opentelemetry-sdk>=1.22.0
+opentelemetry-exporter-jaeger>=1.22.0
+
+# ============================================================================
+# Security
+# ============================================================================
+
+# Security scanning
+bandit>=1.7.0
+safety>=2.3.0
+pip-audit>=2.6.0
+
+# Encryption
+cryptography>=42.0.0
+pycryptodome>=3.19.0
+
+# ============================================================================
+# Development Notes
+# ============================================================================
+#
+# Installation:
+#   pip install -r requirements.txt
+#   pip install -r requirements-dev.txt
+#
+# Or in one step (if using pip-tools):
+#   pip install -r requirements.txt
+#   pip-compile requirements-dev.in  # Generate requirements-dev.txt
+#
+# Optional: Pre-commit hooks
+#   pre-commit install
+#   pre-commit run --all-files
+#
+# Documentation generation:
+#   cd docs/
+#   make html
+#   # Open build/html/index.html
+#
+# Run tests with coverage:
+#   pytest --cov=src tests/ --html=htmlcov/index.html
+#
+# Format code:
+#   black src/ tests/
+#   isort src/ tests/
+#   ruff check --fix src/ tests/
+#
+# Type checking:
+#   mypy src/
+#
+# ============================================================================

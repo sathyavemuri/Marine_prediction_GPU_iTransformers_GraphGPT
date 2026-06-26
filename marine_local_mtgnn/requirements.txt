@@ -1,0 +1,31 @@
+# Core numerical/data/model utilities
+numpy>=1.26
+pandas>=2.2
+pyarrow>=16
+scipy>=1.12
+scikit-learn>=1.5
+pyyaml>=6.0
+pydantic>=2.7
+joblib>=1.4
+tqdm>=4.66
+rich>=13.7
+
+# Local marine/atmospheric calculations (NO external APIs)
+utide>=0.3
+pvlib>=0.10
+gsw>=3.6
+
+# FastAPI service
+fastapi>=0.110
+uvicorn[standard]>=0.29
+
+# Visualization
+matplotlib>=3.8
+
+# Testing and development
+pytest>=8.0
+ruff>=0.5
+mypy>=1.10
+
+# PyTorch - install separately per hardware (CPU/GPU)
+# See README for: pip install torch --index-url https://download.pytorch.org/whl/cpu

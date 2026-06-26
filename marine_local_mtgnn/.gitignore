@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project-specific
+data/raw/
+data/processed/
+outputs/
+*.parquet
+*.joblib
+*.pt
+*.pth
+*.ckpt
+
+# Test coverage
+.coverage
+htmlcov/
+
+# Temporary
+*.tmp
+*.log

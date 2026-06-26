@@ -1,0 +1,10 @@
+[
+  "tidal_residual_m",
+  "current_u_east_ms",
+  "current_v_north_ms",
+  "salinity_psu",
+  "water_temp_c",
+  "log1p_global_radiation_wm2",
+  "log_significant_wave_height_m",
+  "log_zero_crossing_period_s"
+]

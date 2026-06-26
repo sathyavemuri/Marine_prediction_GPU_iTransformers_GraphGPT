@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:\\\\Users\\\\gmsave\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\marinepred\\\\python.exe\" -c \"import gpytorch; print\\('ok', gpytorch.__version__\\)\")"
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "status": "TRAINED",
+  "model": "GraphCast Unified (Atmosphere + Weather)",
+  "configuration": {
+    "input_features": 5,
+    "input_names": [
+      "air_temp_c",
+      "air_pressure_hpa",
+      "wind_speed_ms",
+      "wind_direction_deg",
+      "global_radiation_wm2"
+    ],
+    "output_targets": 14,
+    "output_names": [
+      "air_temp_c",
+      "air_pressure_hpa",
+      "relative_humidity_pct",
+      "dew_point_c",
+      "wind_speed_ms",
+      "wind_direction_deg",
+      "wind_chill_c",
+      "global_radiation_wm2",
+      "precip_diff_mm",
+      "precip_intensity_mmh",
+      "visibility_1min_km",
+      "visibility_10min_km",
+      "visibility_1hr_km",
+      "visibility_24hr_km"
+    ],
+    "categories": {
+      "atmospheric": 8,
+      "precipitation": 2,
+      "visibility": 4
+    }
+  },
+  "training": {
+    "duration_seconds": 61.968104124069214,
+    "training_samples": 115200,
+    "validation_samples": 28800,
+    "test_samples": 10080,
+    "best_epoch": 50,
+    "early_stopping": true
+  },
+  "metrics": {
+    "validation_mse": 0.32058972219958454,
+    "validation_skill_percent": 42.6766185775523,
+    "test_mse": 0.3172752877668858,
+    "test_skill_percent": 26.71169887276671
+  },
+  "per_parameter_skills": {
+    "air_temp_c": {
+      "val_skill": 72.33453175913927,
+      "test_skill": 63.16677948930591
+    },
+    "air_pressure_hpa": {
+      "val_skill": 73.59695921003879,
+      "test_skill": 26.295263498974474
+    },
+    "relative_humidity_pct": {
+      "val_skill": 43.84521621698184,
+      "test_skill": 11.191717418393521
+    },
+    "dew_point_c": {
+      "val_skill": 56.54042822595453,
+      "test_skill": 32.76644661868103
+    },
+    "wind_speed_ms": {
+      "val_skill": 64.0987147456051,
+      "test_skill": 47.59148436492541
+    },
+    "wind_direction_deg": {
+      "val_skill": 65.89388522308673,
+      "test_skill": 69.4474556247299
+    },
+    "wind_chill_c": {
+      "val_skill": 70.6554468805528,
+      "test_skill": 73.14483815360936
+    },
+    "global_radiation_wm2": {
+      "val_skill": 81.26890543656717,
+      "test_skill": 82.97882287913963
+    },
+    "precip_diff_mm": {
+      "val_skill": 5.066207872179684,
+      "test_skill": 0.0
+    },
+    "precip_intensity_mmh": {
+      "val_skill": 5.04463327197252,
+      "test_skill": 0.0
+    },
+    "visibility_1min_km": {
+      "val_skill": 45.9406783709092,
+      "test_skill": 7.41800906313782
+    },
+    "visibility_10min_km": {
+      "val_skill": 47.01090834737287,
+      "test_skill": 7.728948239597533
+    },
+    "visibility_1hr_km": {
+      "val_skill": 50.19757704312595,
+      "test_skill": 8.872377447223545
+    },
+    "visibility_24hr_km": {
+      "val_skill": 51.72491033681936,
+      "test_skill": 22.205914220417
+    }
+  }
+}

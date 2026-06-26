@@ -1,0 +1,7 @@
+[
+  "air_temp_anomaly_c",
+  "log1p_dewpoint_depression_c",
+  "air_pressure_anomaly_hpa",
+  "wind_u_anomaly_ms",
+  "wind_v_anomaly_ms"
+]

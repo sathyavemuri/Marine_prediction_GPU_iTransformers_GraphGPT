@@ -1,0 +1,9 @@
+{
+  "selected_baseline": "PersistenceBaseline",
+  "validation_mae": {
+    "persistence": 1.799869496448412,
+    "daily_seasonal": 2.0496745772524254,
+    "weekly_seasonal": 1.9432988803513724,
+    "trend": 25.269045350814363
+  }
+}

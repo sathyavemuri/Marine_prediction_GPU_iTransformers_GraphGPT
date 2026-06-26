@@ -1,0 +1,128 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+marinepred/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+.sublime-project
+.sublime-workspace
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+
+# Streamlit
+.streamlit/
+.streamlit/secrets.toml
+
+# Data files (keep only essential)
+*.csv
+!marine_data_120days_1min.csv
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+
+# Models (keep code, not trained weights)
+*.pt
+*.pth
+!*.py
+
+# Logs
+*.log
+logs/
+*.out
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Jupyter temp
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Testing
+.pytest_cache/
+.tox/
+coverage.xml
+.coverage
+
+# Documentation
+docs/_build/
+site/
+
+# Azure
+.azure/
+
+# Local development
+local_settings.py
+
+# Node
+node_modules/
+package-lock.json
+
+# Database
+*.db
+*.sqlite
+*.sqlite3

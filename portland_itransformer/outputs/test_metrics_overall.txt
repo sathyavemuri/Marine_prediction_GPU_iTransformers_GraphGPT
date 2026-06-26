@@ -1,0 +1,8 @@
+Overall Metrics - TEST
+==================================================
+
+mse                           : 24.233931
+rmse                          : 4.922797
+rmse_normalized               : 0.004697
+mae                           : 2.567339
+skill_vs_persistence          : 0.021532

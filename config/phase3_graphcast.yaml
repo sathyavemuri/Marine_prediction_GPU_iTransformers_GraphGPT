@@ -1,0 +1,296 @@
+# Phase 3 Production Configuration: Marine iTransformer + GraphCast 3-Tier Fallback
+# Date: 2026-06-25
+# Status: PRODUCTION
+
+phase_3_graphcast:
+  # =========================================================================
+  # MARINE ITRANSFORMER CONFIGURATION
+  # =========================================================================
+  marine:
+    enabled: true
+    model_path: outputs/marine/best_model.pt
+    device: cuda  # or 'cpu' for development
+
+    architecture:
+      seq_len: 1344          # 14 days @ 15-min cadence
+      pred_len: 672          # 7 days @ 15-min cadence
+      enc_in: 8              # 8 marine targets
+      known_in: 4            # 4 calendar features
+      d_model: 64
+      n_heads: 4
+      e_layers: 2
+      d_ff: 128
+      dropout: 0.25
+
+    inference:
+      batch_size: 1
+      dtype: float32
+      use_amp: false         # Automatic mixed precision (if CUDA available)
+
+    monitoring:
+      track_latency: true
+      expected_skill: 0.92
+      alert_if_skill_below: 0.70
+
+  # =========================================================================
+  # ATMOSPHERIC FORECASTING: 3-TIER FALLBACK
+  # =========================================================================
+  atmospheric:
+    enabled: true
+    forecast_hours: 168     # 7 days
+
+    # ─────────────────────────────────────────────────────────────────────
+    # TIER 1: GraphCast (Primary, +55-60% skill)
+    # ─────────────────────────────────────────────────────────────────────
+    graphcast:
+      enabled: true
+      device: cuda           # or 'cpu'
+      model_name: 'google/graphcast'
+
+      inference:
+        batch_size: 1
+        timeout_seconds: 120   # Fallback if exceeds timeout
+        dtype: float32
+
+      monitoring:
+        track_latency: true
+        expected_skill: 0.57   # 55-60% average
+        expected_latency_ms: 75
+        alert_if_skill_below: 0.40
+        alert_if_latency_above_ms: 200
+
+    # ─────────────────────────────────────────────────────────────────────
+    # TIER 2: Aurora (Fallback 1, +40% skill)
+    # ─────────────────────────────────────────────────────────────────────
+    aurora:
+      enabled: true
+      type: api              # 'api' (HuggingFace) or 'local' (download model)
+      device: cpu            # Use CPU to preserve GPU for GraphCast
+
+      api_mode:
+        hf_token: null       # Optional: set if using private models
+        timeout_seconds: 300   # Fallback if exceeds timeout
+
+      local_mode:
+        model_name: 'microsoft/aurora'
+        cache_dir: ~/.cache/huggingface
+
+      inference:
+        batch_size: 1
+        dtype: float32
+
+      monitoring:
+        track_latency: true
+        expected_skill: 0.40   # +40%
+        expected_latency_ms: 500
+        alert_if_skill_below: 0.25
+        alert_if_latency_above_ms: 1000
+
+    # ─────────────────────────────────────────────────────────────────────
+    # TIER 3: Local Statistical Models (Final Fallback, +12% skill)
+    # ─────────────────────────────────────────────────────────────────────
+    local_models:
+      enabled: true
+      artifacts_dir: artifacts/local_models
+
+      models:
+        air_temp: air_temp_model.joblib
+        air_pressure: air_pressure_model.joblib
+        dew_point: dew_point_model.joblib
+        wind_vector: wind_model.joblib
+        water_temp: water_temp_model.joblib
+
+      inference:
+        timeout_seconds: 10    # Should always succeed quickly
+        dtype: float32
+
+      monitoring:
+        track_latency: true
+        expected_skill: 0.12   # +12%
+        expected_latency_ms: 5
+        alert_if_skill_below: 0.05
+        alert_if_latency_above_ms: 50
+
+    # ─────────────────────────────────────────────────────────────────────
+    # FALLBACK STRATEGY & MONITORING
+    # ─────────────────────────────────────────────────────────────────────
+    fallback_strategy:
+      priority: [graphcast, aurora, local]
+      use_best_available: true
+      auto_retry_on_timeout: true
+      max_retry_attempts: 3
+
+    monitoring:
+      track_atmospheric_source: true        # Log which tier is used
+      track_source_distribution: true       # Track % usage of each tier
+      alert_on_fallback: true               # Alert if not using GraphCast
+      alert_on_repeated_fallback: true      # Alert if repeated failures
+      max_fallback_rate: 0.10               # Alert if fallback > 10%
+      skill_tracking: true                  # Track skill by source
+      log_interval_hours: 24                # Daily summary reports
+      save_forecasts_by_source: true        # Archive by source for analysis
+
+  # =========================================================================
+  # PHYSICAL CONSTRAINT ENFORCEMENT
+  # =========================================================================
+  reconstruction:
+    enabled: true
+    enforce_constraints: true
+
+    # Physical valid ranges for all outputs
+    clip_ranges:
+      air_temp_c: [-50, 50]
+      air_pressure_hpa: [950, 1050]
+      dew_point_c: [-50, 50]
+      relative_humidity_pct: [0, 100]
+      wind_speed_ms: [0, 50]
+      wind_direction_deg: [0, 360]
+      wind_u_ms: [-50, 50]
+      wind_v_ms: [-50, 50]
+      salinity_psu: [0, 40]
+      water_temp_c: [-2, 30]
+      significant_wave_height_m: [0, 15]
+      zero_crossing_period_s: [2, 20]
+      global_radiation_wm2: [0, 1200]
+      current_speed_ms: [0, 3]
+      current_u_east_ms: [-3, 3]
+      current_v_north_ms: [-3, 3]
+      tidal_residual_m: [-2, 2]
+
+    # Validation constraints (must be satisfied)
+    validation_constraints:
+      dew_point_must_be_below_air_temp: true
+      humidity_must_be_in_0_100: true
+      wind_speed_must_be_non_negative: true
+      wind_direction_must_be_in_0_360: true
+      pressure_must_be_in_range: true
+      radiation_must_be_non_negative: true
+
+    # Action on constraint violation
+    on_constraint_violation:
+      log_warning: true
+      clip_to_range: true
+      raise_error: false     # Don't fail if constraint violated (clip instead)
+      count_violations: true # Track for monitoring
+
+  # =========================================================================
+  # DATA HANDLING
+  # =========================================================================
+  data:
+    seq_len: 1344           # Input sequence length (14 days)
+    pred_len: 672           # Forecast length (7 days)
+    time_step_minutes: 15   # Temporal resolution
+
+    # Scalers for unscaling model outputs
+    scalers_dir: artifacts/local_models
+    scaler_target: marine_scaler_target.joblib
+    scaler_known: marine_scaler_known.joblib
+
+    # Missing data handling
+    handle_missing_values: true
+    forward_fill: true
+    backward_fill: true
+    interpolation: linear
+
+  # =========================================================================
+  # INFERENCE SETTINGS
+  # =========================================================================
+  inference:
+    enabled: true
+    batch_size: 1
+    num_workers: 0           # Set >0 for parallel data loading (if applicable)
+    pin_memory: false        # Set true if using GPU
+
+    # Forecast generation
+    forecast_interval_hours: 6      # Generate new forecast every 6 hours
+    history_window_days: 14         # Use last 14 days of history
+    forecast_horizon_days: 7        # Forecast 7 days ahead
+
+    # Performance optimization
+    use_mixed_precision: false      # AMP (Automatic Mixed Precision)
+    use_checkpoint: false           # Gradient checkpointing
+    use_jit_compilation: false      # TorchScript/JAX JIT
+
+  # =========================================================================
+  # MONITORING & ALERTING
+  # =========================================================================
+  monitoring:
+    enabled: true
+
+    # General settings
+    log_level: INFO                 # DEBUG, INFO, WARNING, ERROR
+    log_file: logs/phase3_graphcast.log
+    log_interval_minutes: 60        # Log performance metrics every 60 min
+
+    # Metrics to track
+    track_latency: true             # Forecast generation time
+    track_skill: true               # Skill vs baseline/climatology
+    track_constraints: true         # Constraint violation rate
+    track_atmospheric_source: true  # Which tier is being used
+    track_memory_usage: true        # GPU/CPU memory
+
+    # Alerting thresholds
+    alerts:
+      latency_warning_ms: 500       # Warn if forecast takes >500ms
+      latency_critical_ms: 2000     # Critical if takes >2s
+      skill_warning: 0.40           # Warn if skill drops below 40%
+      skill_critical: 0.30          # Critical if skill drops below 30%
+      fallback_warning_rate: 0.05   # Warn if >5% fallback
+      fallback_critical_rate: 0.20  # Critical if >20% fallback
+      constraint_violation_warning: 0.01  # Warn if >1% violations
+      constraint_violation_critical: 0.05 # Critical if >5% violations
+
+    # Alert destinations
+    alert_methods:
+      console: true                 # Print to console
+      logfile: true                 # Write to log file
+      email: false                  # (configure if needed)
+      slack: false                  # (configure if needed)
+      webhook: false                # (configure if needed)
+
+    # Reporting
+    generate_daily_report: true
+    daily_report_time: "00:00"      # UTC time
+    generate_weekly_report: true
+    weekly_report_day: "Monday"
+    archive_reports: true
+    reports_dir: reports/
+
+  # =========================================================================
+  # DEPLOYMENT SETTINGS
+  # =========================================================================
+  deployment:
+    environment: production         # 'development', 'staging', 'production'
+    enable_api: false               # Set true if exposing via API
+    enable_database_logging: false  # Set true if using database
+
+    # Versioning
+    version: "1.0.0"
+    model_version: "phase3_graphcast_2026_06_25"
+
+    # Backup & recovery
+    enable_checkpointing: true
+    checkpoint_interval_hours: 24
+    keep_last_n_checkpoints: 7
+    auto_recovery: true
+
+    # Resource limits
+    max_memory_gb: 16
+    max_gpu_memory_gb: 8
+    timeout_minutes: 5
+
+    # Graceful shutdown
+    graceful_shutdown_timeout_seconds: 30
+    save_state_on_shutdown: true
+    state_file: state/last_forecast.pkl
+
+  # =========================================================================
+  # DEVELOPMENT/DEBUGGING (for non-production use)
+  # =========================================================================
+  debug:
+    enabled: false                  # Set true only for debugging
+    save_intermediate_outputs: false
+    save_dir: debug_outputs/
+    verbose_logging: false
+    profile_performance: false
+    validate_outputs: false

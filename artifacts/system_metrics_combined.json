@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-26",
+  "total_parameters": 31,
+  "forecasted": 28,
+  "not_forecasted": 3,
+  "coverage_percent": 90.32258064516128,
+  "itransformer_test_skill": 80.4,
+  "itransformer_7day_avg": 69.0,
+  "graphcast_test_skill": 26.7,
+  "graphcast_7day_avg": 17.355,
+  "combined_test_skill": 53.550000000000004,
+  "combined_7day_avg": 43.1775
+}

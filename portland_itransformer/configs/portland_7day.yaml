@@ -1,0 +1,59 @@
+project_name: portland_itransformer
+seed: 2025
+
+paths:
+  raw_csv: data/raw/portland_harbor_2025_15min_synthetic_calibrated.csv
+  processed_dir: data/processed
+  artifacts_dir: artifacts
+  outputs_dir: outputs
+
+site:
+  name: "Portland Harbor, Maine, USA (synthetic)"
+  latitude: 43.6570
+  longitude: -70.2460
+  timezone: UTC
+  wind_direction_convention: from
+  current_direction_convention: to
+  sensor_pressure_dbar: 0.0
+
+data:
+  cadence_minutes: 15
+  seq_len: 1344
+  pred_len: 672
+  baseline_fit_days: 60
+  train_target_start: '2025-03-01 00:00:00+00:00'
+  train_target_end: '2025-09-02 23:45:00+00:00'
+  val_target_start: '2025-09-03 00:00:00+00:00'
+  val_target_end: '2025-11-01 23:45:00+00:00'
+  test_target_start: '2025-11-02 00:00:00+00:00'
+  test_target_end: '2025-12-31 23:45:00+00:00'
+  train_stride_steps: 4
+  eval_stride_steps: 96
+  max_short_gap_minutes: 60
+
+model:
+  d_model: 128
+  n_heads: 4
+  e_layers: 3
+  d_ff: 256
+  dropout: 0.20
+  use_instance_norm: true
+
+training:
+  batch_size: 16
+  num_workers: 2
+  epochs: 40
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+  early_stopping_patience: 8
+  scheduler_patience: 3
+  scheduler_factor: 0.5
+  use_amp_if_cuda: true
+
+reconstruction:
+  eps: 0.0001
+  solar_daylight_threshold_wm2: 20.0
+  clearness_index_max: 2.0
+  rh_clip_min: 0.0
+  rh_clip_max: 100.0

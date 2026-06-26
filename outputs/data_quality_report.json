@@ -1,0 +1,65 @@
+{
+  "validation_status": "pass",
+  "timestamp": "2026-06-25T11:14:51.964709+00:00",
+  "data_file": "D:\\Projects_Github\\Marine_Prediction\\marine_120day_18params_10min.csv",
+  "summary": {
+    "total_rows": 17280,
+    "total_columns": 18,
+    "time_range": {
+      "start": "2026-02-22T19:00:00-05:00",
+      "end": "2026-06-22T19:50:00-04:00",
+      "duration_days": 119.0
+    },
+    "missing_values": {
+      "air_temp_c": 0,
+      "air_pressure_hpa": 0,
+      "wind_direction_deg": 0,
+      "water_temp_c": 0,
+      "relative_humidity_pct": 0,
+      "tidal_level_m": 0,
+      "current_direction_deg": 0,
+      "dew_point_c": 0,
+      "significant_wave_height_m": 0,
+      "global_radiation_wm2": 0,
+      "current_speed_ms": 0,
+      "wind_speed_ms": 0,
+      "salinity_psu": 0,
+      "significant_wave_period_s": 0,
+      "zero_crossing_period_s": 0,
+      "conductivity_mscm": 0,
+      "compass_deg": 0,
+      "peak_wave_period_s": 0
+    }
+  },
+  "cadence": {
+    "nominal_minutes": 10.0,
+    "nominal_pandas": "0 days 00:10:00"
+  },
+  "monotonicity": {
+    "is_monotonic": true,
+    "duplicate_count": 0,
+    "duplicates": []
+  },
+  "missing_intervals": null,
+  "value_range_warnings": null,
+  "columns_validated": [
+    "air_temp_c",
+    "air_pressure_hpa",
+    "wind_direction_deg",
+    "water_temp_c",
+    "relative_humidity_pct",
+    "tidal_level_m",
+    "current_direction_deg",
+    "dew_point_c",
+    "significant_wave_height_m",
+    "global_radiation_wm2",
+    "current_speed_ms",
+    "wind_speed_ms",
+    "salinity_psu",
+    "significant_wave_period_s",
+    "zero_crossing_period_s",
+    "conductivity_mscm",
+    "compass_deg",
+    "peak_wave_period_s"
+  ]
+}

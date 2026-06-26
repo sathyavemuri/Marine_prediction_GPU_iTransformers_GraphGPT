@@ -1,0 +1,51 @@
+{
+  "status": "RETRAINED",
+  "model": "Marine Neural Network (with water pressure)",
+  "configuration": {
+    "input_features": 10,
+    "input_names": [
+      "current_speed_ms",
+      "current_direction_deg",
+      "tidal_level_m",
+      "water_temp_c",
+      "salinity_psu",
+      "significant_wave_height_m",
+      "significant_wave_period_s",
+      "conductivity_mscm",
+      "water_pressure_dbar",
+      "tide_pressure_dbar"
+    ],
+    "output_targets": 3,
+    "output_names": [
+      "tidal_level_m",
+      "current_speed_ms",
+      "peak_wave_period_s"
+    ],
+    "new_parameters": [
+      "water_pressure_dbar",
+      "tide_pressure_dbar"
+    ]
+  },
+  "training": {
+    "duration_seconds": 88.26669836044312,
+    "training_samples": 115200,
+    "validation_samples": 28800,
+    "test_samples": 10080,
+    "best_epoch": 12,
+    "early_stopping": true
+  },
+  "metrics": {
+    "validation_mse": 0.0687083703747928,
+    "validation_skill_percent": 73.74785463103981,
+    "test_mse": 0.028819510074639607,
+    "test_skill_percent": 80.38216044989916
+  },
+  "data_config": {
+    "training_period": "80 days (Feb 23 - May 13)",
+    "validation_period": "20 days (May 14 - Jun 2)",
+    "test_period": "7 days (Jun 3 - Jun 9)",
+    "total_parameters_forecasted": 29,
+    "total_parameters_in_csv": 31,
+    "coverage_percent": 94
+  }
+}

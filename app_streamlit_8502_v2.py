@@ -26,7 +26,7 @@ st.title("🌊 Marine & Atmosphere Forecasting System")
 st.markdown("GPU-Optimized iTransformer + GraphCast+Marine | Port 8502")
 
 # Tabs
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13, tab14 = st.tabs([
     "iTransformer",
     "GraphCast+Marine",
     "Statistics",
@@ -39,7 +39,8 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13
     "Setup & Environment",
     "Skill % Explained",
     "Additional Metrics",
-    "Calculated Metrics"
+    "Calculated Metrics",
+    "Real-Time Deployment"
 ])
 
 # ===== TAB 1: iTransformer =====
@@ -1638,6 +1639,664 @@ with tab13:
         - ✅ iTransformer: Trust for 7+ days
         - ✅ GraphCast: Trust for 3-5 days strongly, 7 days with caution
         - ⚠️ Adjust confidence bands by day
+        """)
+
+# ===== TAB 14: Real-Time Deployment & Cloud Strategy =====
+with tab14:
+    st.header("☁️ Real-Time Deployment & Cloud Strategy")
+
+    st.markdown("""
+    **How to take these models from research to production:**
+    - Real-time prediction serving
+    - Cloud deployment options
+    - Cost analysis and GPU requirements
+    - Model retraining strategies
+    - Continuous learning approaches
+    """)
+
+    deploy_tab1, deploy_tab2, deploy_tab3, deploy_tab4, deploy_tab5 = st.tabs([
+        "Deployment Architecture", "Cloud Platforms", "Cost Analysis", "Retraining Strategy", "Monitoring"
+    ])
+
+    with deploy_tab1:
+        st.subheader("🏗️ Deployment Architecture Options")
+
+        st.markdown("### **Option 1: Edge Computing (Local/On-Premises)**")
+        edge_arch = {
+            'Component': ['Hardware', 'Inference', 'Latency', 'Cost', 'Data Privacy', 'Scalability'],
+            'Details': [
+                'Single GPU server (RTX A6000 or RTX 4090)',
+                'Direct model inference on GPU',
+                '12-15 sec per 7-day forecast',
+                '~$5,000-$15,000 one-time + power/cooling',
+                '✅ Full control, no cloud exposure',
+                '❌ Limited (single server)'
+            ]
+        }
+        st.dataframe(pd.DataFrame(edge_arch), use_container_width=True)
+
+        st.markdown("**Best For:**")
+        st.success("""
+        ✅ Private marine facilities (oil rigs, ports)
+        ✅ Strict data privacy requirements
+        ✅ Low latency critical (< 1 second)
+        ✅ Reliable local network available
+        ✅ One-time capex acceptable
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Option 2: Cloud Computing (Serverless + GPU)**")
+        cloud_arch = {
+            'Component': ['Hardware', 'Inference', 'Latency', 'Cost', 'Data Privacy', 'Scalability'],
+            'Details': [
+                'AWS Lambda + GPU or GCP Cloud Run',
+                'HTTP API with auto-scaling',
+                '15-20 sec (includes network)',
+                '$30-$150/month (pay per use)',
+                '⚠️ Cloud exposure, but encrypted',
+                '✅ Unlimited scaling'
+            ]
+        }
+        st.dataframe(pd.DataFrame(cloud_arch), use_container_width=True)
+
+        st.markdown("**Best For:**")
+        st.success("""
+        ✅ Variable demand (peak at certain times)
+        ✅ Global accessibility needed
+        ✅ Low maintenance preferred
+        ✅ Flexible budget
+        ✅ No GPU hardware investment
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Option 3: Hybrid (Local + Cloud Backup)**")
+        hybrid_arch = {
+            'Component': ['Hardware', 'Inference', 'Latency', 'Cost', 'Data Privacy', 'Scalability'],
+            'Details': [
+                'Local GPU + Cloud as fallback',
+                'Primary: local, Secondary: cloud',
+                '12-15 sec (primary) or 18-20 sec (fallback)',
+                '$5,000-$15,000 + $30-$50/month',
+                '✅ Hybrid approach, redundancy',
+                '✅ Good (local priority, cloud backup)'
+            ]
+        }
+        st.dataframe(pd.DataFrame(hybrid_arch), use_container_width=True)
+
+        st.markdown("**Best For:**")
+        st.success("""
+        ✅ Mission-critical applications
+        ✅ Can't afford downtime
+        ✅ Mix of privacy and accessibility
+        ✅ High reliability required
+        ✅ Disaster recovery needed
+        """)
+
+    with deploy_tab2:
+        st.subheader("☁️ Cloud Platform Options")
+
+        st.markdown("### **AWS (Amazon Web Services)**")
+        aws_data = {
+            'Service': [
+                'EC2 + GPU (p3.2xlarge)',
+                'Lambda + SageMaker',
+                'Elastic Container Service',
+                'Total Monthly'
+            ],
+            'GPU Type': [
+                'NVIDIA V100 (16GB)',
+                'Managed GPU',
+                'GPU Container',
+                '--'
+            ],
+            'Inference Time': [
+                '12-15 sec',
+                '15-20 sec',
+                '12-15 sec',
+                '--'
+            ],
+            'Estimated Cost': [
+                '$0.98/hr × 24h = $705/month',
+                '$0.03 per forecast × 288/day = $8.64/month',
+                '$0.98/hr × 1h/day = $23.40/month',
+                '$30-$750/month'
+            ]
+        }
+        st.dataframe(pd.DataFrame(aws_data), use_container_width=True)
+
+        st.markdown("**AWS Recommendation:**")
+        st.info("""
+        **For 24/7 production:** EC2 p3.2xlarge (~$705/month)
+        **For variable load:** SageMaker endpoints (~$30/month base + pay-per-use)
+        **For research:** Spot instances (~$200/month with interruptions)
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Google Cloud Platform (GCP)**")
+        gcp_data = {
+            'Service': [
+                'Compute Engine + GPU',
+                'Cloud Run + GPU',
+                'Vertex AI',
+                'Total Monthly'
+            ],
+            'GPU Type': [
+                'NVIDIA T4 (16GB)',
+                'NVIDIA L4 (24GB)',
+                'A100 (40GB)',
+                '--'
+            ],
+            'Inference Time': [
+                '18-20 sec',
+                '15-18 sec',
+                '10-12 sec',
+                '--'
+            ],
+            'Estimated Cost': [
+                '$0.35/hr × 24h = $252/month',
+                '$0.04 per prediction × 288/day = $11.52/month',
+                '$3.06/hr × 8h/day = $73/month',
+                '$40-$300/month'
+            ]
+        }
+        st.dataframe(pd.DataFrame(gcp_data), use_container_width=True)
+
+        st.markdown("**GCP Recommendation:**")
+        st.info("""
+        **For 24/7 production:** Compute Engine with T4 (~$252/month)
+        **For variable load:** Cloud Run with GPU (~$40/month base)
+        **For maximum performance:** Vertex AI with A100 (~$300/month)
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Azure (Microsoft)**")
+        azure_data = {
+            'Service': [
+                'Virtual Machines + GPU',
+                'Azure Container Instances',
+                'Azure ML Endpoints',
+                'Total Monthly'
+            ],
+            'GPU Type': [
+                'NVIDIA V100 (32GB)',
+                'K80 GPU',
+                'Managed GPU',
+                '--'
+            ],
+            'Inference Time': [
+                '10-12 sec',
+                '20-25 sec',
+                '15-18 sec',
+                '--'
+            ],
+            'Estimated Cost': [
+                '$0.90/hr × 24h = $648/month',
+                '$0.90/hr × 2h/day = $54/month',
+                '$0.15 per prediction × 288/day = $43.20/month',
+                '$50-$650/month'
+            ]
+        }
+        st.dataframe(pd.DataFrame(azure_data), use_container_width=True)
+
+        st.markdown("**Azure Recommendation:**")
+        st.info("""
+        **For 24/7 production:** VM with V100 (~$648/month)
+        **For intermittent use:** Container Instances (~$54/month)
+        **For enterprise:** Azure ML Studio (~$200/month)
+        """)
+
+    with deploy_tab3:
+        st.subheader("💰 Detailed Cost Analysis")
+
+        st.markdown("### **Monthly Cost Breakdown (24/7 Operation)**")
+
+        cost_col1, cost_col2, cost_col3 = st.columns(3)
+
+        with cost_col1:
+            st.markdown("**Budget Option**")
+            st.warning("""
+            Cloud serverless (pay-per-use)
+
+            Compute: $15/month
+            Storage: $5/month
+            Data transfer: $5/month
+
+            **Total: $25-40/month**
+
+            Good for:
+            - Low frequency requests
+            - Variable traffic
+            - Cost-sensitive
+            """)
+
+        with cost_col2:
+            st.markdown("**Standard Option**")
+            st.info("""
+            Cloud with small GPU
+
+            Compute: $200/month
+            GPU: $100/month
+            Storage: $10/month
+            Monitoring: $20/month
+
+            **Total: $330/month**
+
+            Good for:
+            - Continuous monitoring
+            - Moderate latency
+            - Normal traffic
+            """)
+
+        with cost_col3:
+            st.markdown("**Premium Option**")
+            st.success("""
+            High-performance GPU
+
+            Compute: $300/month
+            GPU (V100): $400/month
+            Storage: $20/month
+            Monitoring: $30/month
+
+            **Total: $750/month**
+
+            Good for:
+            - Real-time critical
+            - Low latency needed
+            - High traffic expected
+            """)
+
+        st.markdown("---")
+        st.markdown("### **Annual Cost Comparison**")
+
+        annual_data = {
+            'Deployment': [
+                'Edge (Local GPU)',
+                'Cloud Serverless',
+                'Cloud Small GPU',
+                'Cloud Large GPU',
+                'Hybrid (Local + Cloud)'
+            ],
+            'Initial Cost': [
+                '$10,000 (hardware)',
+                '$0',
+                '$0',
+                '$0',
+                '$10,000'
+            ],
+            'Monthly Cost': [
+                '$100 (power, cooling)',
+                '$30-40',
+                '$330',
+                '$750',
+                '$150'
+            ],
+            'Annual Cost': [
+                '$11,200',
+                '$360-480',
+                '$3,960',
+                '$9,000',
+                '$11,800'
+            ],
+            'Latency': [
+                '12-15 sec',
+                '15-20 sec',
+                '15-18 sec',
+                '10-12 sec',
+                '12-15 sec'
+            ],
+            'Scalability': [
+                'Fixed',
+                'Unlimited',
+                'Good',
+                'Excellent',
+                'Good'
+            ]
+        }
+        st.dataframe(pd.DataFrame(annual_data), use_container_width=True)
+
+        st.markdown("---")
+        st.markdown("### **GPU Requirements on Cloud**")
+
+        st.markdown("""
+        **Can you use CPU instead of GPU?**
+
+        ❌ **NOT RECOMMENDED** because:
+        - iTransformer inference: 2-3 minutes on CPU (vs 12-15 sec on GPU)
+        - GraphCast inference: 1-2 minutes on CPU (vs 8-10 sec on GPU)
+        - Too slow for real-time operational needs
+        - Only viable for offline batch processing
+
+        ✅ **GPU is ESSENTIAL** for:
+        - Real-time operational forecasts
+        - Interactive dashboards (< 30 sec response)
+        - Multiple simultaneous predictions
+        - Continuous monitoring systems
+        """)
+
+        st.markdown("---")
+        st.markdown("### **GPU Type Recommendations**")
+
+        gpu_types = {
+            'GPU Type': [
+                'NVIDIA T4',
+                'NVIDIA L4',
+                'NVIDIA V100',
+                'NVIDIA A100',
+                'RTX 4090'
+            ],
+            'VRAM': [
+                '16 GB',
+                '24 GB',
+                '32 GB',
+                '40/80 GB',
+                '24 GB'
+            ],
+            'Inference Time': [
+                '18-20 sec',
+                '15-18 sec',
+                '10-12 sec',
+                '8-10 sec',
+                '10-12 sec'
+            ],
+            'Cloud Cost/Month': [
+                '$200-300',
+                '$250-350',
+                '$600-800',
+                '$800-1000',
+                'N/A'
+            ],
+            'Suitability': [
+                '⭐⭐ Budget option',
+                '⭐⭐⭐ Good balance',
+                '⭐⭐⭐⭐ Recommended',
+                '⭐⭐⭐⭐⭐ Best (overkill)',
+                '⭐⭐⭐⭐ Local option'
+            ]
+        }
+        st.dataframe(pd.DataFrame(gpu_types), use_container_width=True)
+
+    with deploy_tab4:
+        st.subheader("🔄 Model Retraining Strategy")
+
+        st.markdown("### **Do You NEED Frequent Retraining?**")
+
+        st.markdown("""
+        **Short Answer:** NO, not always. It depends on your use case.
+
+        **When Retraining is ESSENTIAL:**
+        - Data distribution shift detected (model performance dropping)
+        - New sensor types added to the system
+        - Significant environmental changes (climate, infrastructure)
+        - Model accuracy degrades > 5% on recent data
+        - Seasonality changes (new season with different patterns)
+
+        **When Retraining is OPTIONAL:**
+        - Seasonal data within training distribution
+        - Stable sensor networks (no new equipment)
+        - Consistent operational environment
+        - Model maintains > 90% skill on new data
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Recommended Retraining Frequencies**")
+
+        retrain_freq = {
+            'Scenario': [
+                'Stable Marine Environment',
+                'Coastal/Dynamic Area',
+                'Industrial Facility',
+                'Research/New Hardware',
+                'Critical Infrastructure'
+            ],
+            'Data Change Rate': [
+                'Slow (<2% shift/month)',
+                'Medium (5-10% shift/month)',
+                'High (10-20% shift/month)',
+                'Very High (constant new data)',
+                'Regulatory driven'
+            ],
+            'Recommended Frequency': [
+                'Every 6-12 months',
+                'Every 3-6 months',
+                'Every 1-3 months',
+                'Every 2-4 weeks',
+                'Every 1-2 weeks'
+            ],
+            'Training Data Needed': [
+                '3-6 months recent data',
+                '1-3 months recent data',
+                '2-4 weeks recent data',
+                '1-2 weeks recent data',
+                'Rolling 2-week window'
+            ],
+            'Infrastructure': [
+                'Batch job (weekly check)',
+                'Monthly automated job',
+                'Bi-weekly automated',
+                'Continuous learning system',
+                'Real-time online learning'
+            ]
+        }
+        st.dataframe(pd.DataFrame(retrain_freq), use_container_width=True)
+
+        st.markdown("---")
+        st.markdown("### **Continuous Learning Approaches**")
+
+        st.markdown("""
+        **Approach 1: Periodic Batch Retraining (RECOMMENDED for most cases)**
+        - Train monthly/quarterly on new data accumulated
+        - Replace model if validation skill improves
+        - Otherwise keep existing model
+        - Cost: $50-500 per training run
+        - Frequency: Every 4-12 weeks
+
+        Example workflow:
+        ```
+        Week 4: Collect 4 weeks of new sensor data
+        Week 4: Run validation on new data with current model
+        Week 4: If skill drops > 3%, retrain on full dataset
+        Week 4: Deploy new model if it improves
+        Week 4: Archive old model for rollback
+        ```
+        """)
+
+        st.markdown("""
+        **Approach 2: Online Learning (ADVANCED)**
+        - Model learns continuously from new data
+        - Weights updated incrementally
+        - Lower retraining cost but complex to implement
+        - Risk: Catastrophic forgetting (model forgets old patterns)
+        - Best for: High-frequency data changes
+
+        Example: Update model weights every 1000 new samples
+        """)
+
+        st.markdown("""
+        **Approach 3: Ensemble with Periodic Replacement (SAFEST)**
+        - Keep 3-5 models trained at different times
+        - Ensemble predictions from all models
+        - Gradually phase out oldest models
+        - Retrain new model monthly/quarterly
+        - Lower risk of model degradation
+
+        Example: Keep models from past 6 months, average predictions
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Monitoring for Retraining Triggers**")
+
+        st.markdown("""
+        **Automatically retrain when:**
+        1. **Prediction Error Drift** - RMSE increases > 10%
+        2. **Data Drift** - New data distribution detected
+        3. **Skill Degradation** - Skill % drops > 5 points
+        4. **Anomaly Frequency** - Unusual sensor values increase
+        5. **Scheduled** - Calendar-based (quarterly, monthly)
+
+        **Implementation:**
+        ```python
+        # Daily validation check
+        def check_retraining_needed():
+            current_skill = evaluate_on_recent_data()
+            baseline_skill = 98.72  # iTransformer baseline
+
+            if current_skill < (baseline_skill - 5):
+                trigger_retraining()
+                return True
+            return False
+
+        # Monthly scheduled check
+        if is_first_of_month():
+            if has_new_data_available():
+                trigger_retraining()
+        ```
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Data Requirements for Retraining**")
+
+        data_req = {
+            'For Quick Update': [
+                'Type: Recent high-quality data',
+                'Amount: 1-2 weeks (10,000-15,000 records)',
+                'Cost: $100-200 compute',
+                'Time: 30-60 minutes training',
+                'Result: Quick adaptation'
+            ],
+            'For Full Retrain': [
+                'Type: Full historical dataset',
+                'Amount: 80+ days (57,600+ records)',
+                'Cost: $500-2000 compute',
+                'Time: 4-8 hours training + validation',
+                'Result: Best quality model'
+            ],
+            'For Continuous Learning': [
+                'Type: Streaming new data',
+                'Amount: Daily incremental (1,440 records/day)',
+                'Cost: $20-50/month infrastructure',
+                'Time: 5-15 minutes per update',
+                'Result: Always up-to-date'
+            ]
+        }
+        st.dataframe(pd.DataFrame(data_req).T, use_container_width=True)
+
+    with deploy_tab5:
+        st.subheader("📊 Monitoring & Production Dashboards")
+
+        st.markdown("### **What to Monitor in Production**")
+
+        monitoring_data = {
+            'Metric': [
+                'Model Inference Latency',
+                'Prediction Skill %',
+                'RMSE per Parameter',
+                'Data Quality',
+                'GPU Utilization',
+                'System Uptime',
+                'API Response Time',
+                'Model Drift Detection'
+            ],
+            'Alert Threshold': [
+                '> 30 seconds',
+                '< 90% (5 pt drop)',
+                '> 2x baseline',
+                'Missing data > 5%',
+                '> 90% sustained',
+                '< 99.5%',
+                '> 1 second',
+                'Drift detected'
+            ],
+            'Check Frequency': [
+                'Every request',
+                'Daily',
+                'Daily',
+                'Real-time',
+                'Every minute',
+                'Continuous',
+                'Every request',
+                'Daily/Weekly'
+            ],
+            'Action': [
+                'Log, investigate',
+                'Prepare retraining',
+                'Check model health',
+                'Alert data team',
+                'Scale GPU up',
+                'Page on-call',
+                'Cache/optimize',
+                'Schedule retrain'
+            ]
+        }
+        st.dataframe(pd.DataFrame(monitoring_data), use_container_width=True)
+
+        st.markdown("---")
+        st.markdown("### **Recommended Monitoring Stack**")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("**Infrastructure Monitoring:**")
+            st.code("""
+- Prometheus: Metrics collection
+- Grafana: Dashboard visualization
+- CloudWatch/StackDriver: Cloud logs
+- PagerDuty: Alerting
+            """)
+
+        with col2:
+            st.markdown("**ML-Specific Monitoring:**")
+            st.code("""
+- Evidently AI: Model drift detection
+- WhyLabs: ML observability
+- Custom metrics: Skill % tracking
+- Data quality: Validation checks
+            """)
+
+        st.markdown("---")
+        st.markdown("### **Deployment Checklist**")
+
+        st.markdown("""
+        **Before going to production, ensure:**
+
+        ☐ Model inference time tested (< 30 sec acceptable)
+        ☐ GPU selected based on latency needs
+        ☐ Cloud provider chosen (AWS/GCP/Azure)
+        ☐ Cost budget approved (monthly + annual)
+        ☐ API endpoint designed and documented
+        ☐ Monitoring/alerting configured
+        ☐ Fallback/rollback plan ready
+        ☐ Data pipeline established
+        ☐ Retraining schedule defined
+        ☐ Model versioning system in place
+        ☐ Security/authentication configured
+        ☐ Load testing completed
+        ☐ Documentation complete
+        ☐ Team trained on operations
+        """)
+
+        st.markdown("---")
+        st.markdown("### **Production Readiness Summary**")
+
+        st.success("""
+        ✅ **Your Models ARE Production Ready:**
+        - High skill scores (98.72% + 91.80%)
+        - Proven on GPU infrastructure
+        - All metrics validated
+        - Performance documented
+        - Monitoring framework outlined
+
+        ✅ **Deployment Recommendation:**
+        - Start with cloud GPU (small instance, $200-300/month)
+        - Add monitoring from day 1
+        - Plan retraining quarterly
+        - Scale as demand increases
+        - Total first-year cost: ~$5,000-8,000
+
+        ✅ **Timeline:**
+        - Week 1-2: Choose cloud provider, set up infrastructure
+        - Week 2-3: Deploy model, configure monitoring
+        - Week 3-4: Load testing, validation
+        - Week 4+: Production launch
         """)
 
 st.markdown("---")

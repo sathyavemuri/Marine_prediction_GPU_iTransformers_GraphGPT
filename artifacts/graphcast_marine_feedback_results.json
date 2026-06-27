@@ -1,0 +1,63 @@
+{
+  "model_type": "GraphCast with Marine Feedback",
+  "device": "cuda",
+  "input_dim": 30,
+  "output_dim": 15,
+  "coupling": "Marine feedback enabled",
+  "training_time_seconds": 806.3481202125549,
+  "n_parameters": 1044879,
+  "test_metrics": {
+    "skill": [
+      99.1133041381836,
+      99.98291015625,
+      99.66382598876953,
+      98.93148803710938,
+      98.94001770019531,
+      95.68779754638672,
+      99.36907958984375,
+      97.7490463256836,
+      62.24953079223633,
+      62.24789047241211,
+      65.87566375732422,
+      98.2264175415039,
+      99.59764862060547,
+      99.58238220214844,
+      99.72772216796875
+    ],
+    "rmse": [
+      0.15824875235557556,
+      0.17230649292469025,
+      0.25291314721107483,
+      0.14174628257751465,
+      0.18917550146579742,
+      0.44496846199035645,
+      1.4099478721618652,
+      8.102299690246582,
+      0.00621930742636323,
+      0.3731738030910492,
+      0.06613441556692123,
+      0.3194221258163452,
+      0.0724480152130127,
+      0.0751572698354721,
+      0.04895272105932236
+    ],
+    "parameters": [
+      "air_temp_c",
+      "air_pressure_hpa",
+      "relative_humidity_pct",
+      "dew_point_c",
+      "wind_chill_c",
+      "wind_speed_ms",
+      "wind_direction_deg",
+      "global_radiation_wm2",
+      "precip_diff_mm",
+      "precip_intensity_mmh",
+      "precip_type",
+      "visibility_1min_km",
+      "visibility_10min_km",
+      "visibility_1hr_km",
+      "visibility_24hr_km"
+    ],
+    "average_skill": 91.79631805419922
+  }
+}

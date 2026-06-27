@@ -1,0 +1,62 @@
+{
+  "model_type": "iTransformer GPU-Optimized (15 outputs)",
+  "device": "cuda",
+  "mixed_precision": true,
+  "batch_size": 128,
+  "training_time_seconds": 482.4568123817444,
+  "n_parameters": 2419249,
+  "test_metrics": {
+    "skill": [
+      98.42771911621094,
+      94.49417877197266,
+      96.67697143554688,
+      99.67533111572266,
+      98.7894515991211,
+      99.95384216308594,
+      99.85261535644531,
+      97.80162811279297,
+      99.66812896728516,
+      99.69548797607422,
+      98.3472900390625,
+      98.2332763671875,
+      99.71257019042969,
+      99.7037582397461,
+      99.7044906616211
+    ],
+    "rmse": [
+      0.016985615715384483,
+      10.177325248718262,
+      0.036779504269361496,
+      0.0392451174557209,
+      0.16609057784080505,
+      0.015932399779558182,
+      0.13104559481143951,
+      14.27132797241211,
+      0.04031931981444359,
+      0.03698540851473808,
+      0.02817581221461296,
+      0.052701644599437714,
+      0.015616168268024921,
+      0.019075414165854454,
+      0.014865711331367493
+    ],
+    "parameters": [
+      "current_speed_ms",
+      "current_direction_deg",
+      "tidal_level_m",
+      "water_level_m",
+      "water_temp_c",
+      "salinity_psu",
+      "conductivity_mscm",
+      "water_temp_quality_c",
+      "water_pressure_dbar",
+      "tide_pressure_dbar",
+      "significant_wave_height_m",
+      "max_wave_height_m",
+      "significant_wave_period_s",
+      "peak_wave_period_s",
+      "zero_crossing_period_s"
+    ],
+    "average_skill": 98.71578216552734
+  }
+}

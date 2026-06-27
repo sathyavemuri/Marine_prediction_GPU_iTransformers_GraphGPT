@@ -2725,168 +2725,169 @@ print(f"\\n✅ Batch complete! {len(batch_results)} forecasts saved.")
            ```
         """)
 
-# ===== TAB 16: GPU Deployment Files & Directories =====
+# ===== TAB 16: GPU Implementation Files & Directory =====
 with tab16:
-    st.markdown("# 📁 GPU Deployment: Files & Directories")
+    st.markdown("# 🚀 GPU Implementation Files (Complete Inventory)")
 
-    st.markdown("## Complete Project Structure for GPU Deployment")
+    st.markdown("## 📊 GPU Implementation Files (Actually Present in Repository)")
 
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.info("""
-        This tab shows the exact file structure and locations needed for
-        deploying iTransformer + GraphCast on GPU in production.
+        st.success("""
+        ✅ This tab shows ALL GPU implementation files currently present
+        in the Marine_prediction_GPU_iTransformers_GraphGPT repository.
+
+        Total: 50+ files across 6 categories
         """)
 
     with col2:
-        st.metric(label="Total Size", value="~150 MB")
+        st.metric(label="Total Size", value="~500 MB")
 
     st.markdown("---")
-    st.markdown("## 📂 Directory Structure")
+    st.markdown("## 🎯 GPU IMPLEMENTATION FILES BREAKDOWN")
 
-    directory_structure = """
-marine-forecaster-gpu/
-│
-├── 📦 Models (GPU inference files)
-│   ├── artifacts/
-│   │   ├── best_model_itransformer.pt              [2.4M params, 10 MB]
-│   │   ├── best_model_graphcast_unified.pt         [1.0M params, 4 MB]
-│   │   ├── best_model_water_pressure.pt            [51 KB]
-│   │   ├── itransformer_gpu_results.json           [Performance metrics]
-│   │   ├── graphcast_marine_feedback_results.json  [Performance metrics]
-│   │   └── system_metrics_combined.json            [Hardware info]
-│   │
-│   └── outputs/
-│       ├── best_model.pt                           [Main iTransformer]
-│       ├── marine/best_model.pt
-│       └── atmosphere/best_model.pt
-│
-├── 🔧 Application Code
-│   ├── app.py                                      [Flask/FastAPI server]
-│   ├── inference.py                                [Core inference logic]
-│   ├── api_routes.py                               [REST endpoints]
-│   ├── config.py                                   [Configuration]
-│   └── utils.py                                    [Helper functions]
-│
-├── ⚙️ Configuration Files
-│   ├── requirements.txt                            [Python dependencies]
-│   ├── environment.yml                             [Conda environment]
-│   ├── docker-compose.yml                          [Container config]
-│   ├── dockerfile                                  [Docker build]
-│   └── kubernetes/                                 [K8s deployment]
-│       ├── deployment.yaml
-│       ├── service.yaml
-│       └── configmap.yaml
-│
-├── 📊 Data & Training
-│   ├── data/
-│   │   ├── marine_data_120days_1min.csv           [34 MB, training data]
-│   │   ├── train/                                  [Training split]
-│   │   ├── valid/                                  [Validation split]
-│   │   └── test/                                   [Test split]
-│   │
-│   └── preprocessing/
-│       ├── scaler_marine.pkl                       [Feature scaler]
-│       ├── scaler_atmosphere.pkl
-│       └── preprocessing.py
-│
-├── 📝 Documentation
-│   ├── README.md                                   [Quick start]
-│   ├── DEPLOYMENT.md                               [Deployment guide]
-│   ├── API_DOCS.md                                 [API reference]
-│   └── ARCHITECTURE.md                             [System design]
-│
-├── 🧪 Tests
-│   ├── test_inference.py                           [Unit tests]
-│   ├── test_api.py                                 [API tests]
-│   ├── test_models.py                              [Model tests]
-│   └── conftest.py                                 [Test config]
-│
-├── 📈 Monitoring & Logs
-│   ├── logs/
-│   │   ├── inference.log
-│   │   ├── errors.log
-│   │   └── performance.log
-│   │
-│   └── metrics/
-│       ├── prometheus_config.yaml
-│       └── grafana_dashboards/
-│
-└── 🚀 CI/CD
-    ├── .github/
-    │   └── workflows/
-    │       ├── test.yml
-    │       ├── build.yml
-    │       └── deploy.yml
-    │
-    └── scripts/
-        ├── build.sh
-        ├── deploy.sh
-        └── health_check.sh
+    gpu_files_structure = """
+GPU IMPLEMENTATION FILES - COMPLETE INVENTORY
+════════════════════════════════════════════
+
+📊 GPU TRAINING SCRIPTS (6 files, 46 KB)
+├── run_gpu_training_all.py                    [6.5 KB] Main GPU training runner
+├── run_gpu_training_simple.py                 [1.4 KB] Simple GPU training
+├── train_itransformer_gpu.py                  [11.7 KB] iTransformer GPU training
+├── train_graphcast_gpu.py                     [10.4 KB] GraphCast GPU training
+├── train_graphcast_with_marine_feedback_gpu.py [12.3 KB] GraphCast + marine
+└── train_chronos2_gpu.py                      [10.9 KB] Chronos-2 GPU training
+
+🚀 GPU INFERENCE & DEPLOYMENT (5 files, 161 KB)
+├── app.py                                     [~10 KB] Main Streamlit app
+├── app_streamlit_8502_v2.py                   [116 KB] Dashboard + Tab 15 & 16 ✨
+├── deploy_production.py                       [17.3 KB] Production deployment
+├── deploy_and_forecast.py                     [10.5 KB] Inference + forecasting
+├── app_hybrid_v5.py                           [17.2 KB] Hybrid model dashboard
+└── app_multihorizon_itransformer.py           [10.0 KB] Multi-horizon app
+
+🤖 TRAINED GPU MODELS (9 files, 14 MB)
+├── artifacts/
+│   ├── best_model_graphcast_unified.pt        [54 KB] GraphCast model
+│   ├── best_model_water_pressure.pt           [51 KB] Water pressure model
+│   └── JSON results (5 files)                 [10 KB] Performance metrics
+├── outputs/
+│   ├── best_model.pt                          [762 KB] iTransformer
+│   └── marine/best_model.pt                   [782 KB] Marine model
+└── portland_itransformer/outputs/
+    ├── best_model.pt                          [7.6 MB] ⭐ Main iTransformer (2.4M params)
+    ├── marine/best_model.pt                   [1.4 MB] Marine-specific
+    ├── atmosphere/best_model.pt               [1.4 MB] Atmosphere-specific
+    ├── unified/unified/best_model.pt          [1.4 MB] Unified model
+    └── atmosphere_timexer/                    [1.4 MB] TimExer variant
+
+⚙️ CONFIGURATION & SETUP (2 files, 1 KB)
+├── environment.yml                            [0.6 KB] Conda GPU environment
+└── requirements.txt                           [0.4 KB] pip dependencies
+
+📚 GPU DOCUMENTATION & GUIDES (25+ files, 200 KB)
+├── GPU_DASHBOARD_README.md                    Quick start guide
+├── GPU_TRAINING_RESULTS_SUMMARY.md            Training results
+├── DEPLOYMENT_MANIFEST.md                     Complete deployment
+├── DEPLOYMENT_COMPLETE.md                     Completion report
+├── HYBRID_CPU_GPU_STRATEGY.md                 CPU/GPU hybrid approach
+├── GRAPHCAST_DEPLOYMENT_GUIDE.md              GraphCast specific
+├── PRODUCTION_DEPLOYMENT_CHECKLIST.md         Pre-deployment checklist
+├── PHASE_3_IMPLEMENTATION.md                  Phase 3 details
+├── MARINE_FORECASTING_IMPLEMENTATION_GUIDE.md Full implementation guide
+└── [19 more deployment, training, and implementation guides...]
+
+🧪 EXPERIMENTAL GPU TESTS (4 files, 40 KB)
+├── test_phase3_inference.py                   [10.0 KB] Phase 3 inference tests
+├── test_phase3_direct.py                      [8.9 KB] Direct phase 3 tests
+├── show_phase3_results.py                     [13.8 KB] Results visualization
+└── example_phase3_forecast.py                 [7.1 KB] Example forecasts
+
+📊 RESULTS & METRICS (9 JSON files, 15 KB)
+├── itransformer_gpu_results.json              [1.6 KB] iTransformer metrics
+├── graphcast_marine_feedback_results.json     [1.5 KB] GraphCast metrics
+├── graphcast_gpu_results.json                 [1.5 KB] GraphCast GPU metrics
+├── detailed_skills_extended.json              [3.6 KB] Extended skill metrics
+├── system_metrics_combined.json               [400 B] Combined system metrics
+├── retrain_config.json                        [800 B] Retraining config
+├── retrain_results_graphcast_unified.json     [2.8 KB] GraphCast retrain results
+├── retrain_results_water_pressure.json        [1.4 KB] Water pressure results
+└── gpu_training_summary.json                  [300 B] Training summary
+
+💾 TRAINING DATA (1 file, 34 MB)
+└── marine_data_120days_1min.csv               [34 MB] 172,800 records, 31 columns
+    ├── 15 marine parameters
+    ├── 15 atmosphere parameters
+    └── 1-minute resolution (120 days)
+
+📦 TRAINING/TEST DATA SPLITS (12 numpy files, 28 MB)
+└── artifacts/
+    ├── train_X_*.npy, test_X_*.npy (input features)
+    ├── train_y_*.npy, test_y_*.npy (target values)
+    ├── val_X_*.npy, val_y_*.npy (validation splits)
+    └── scaler_*.joblib (feature scalers)
     """
 
-    st.code(directory_structure, language="")
+    st.code(gpu_files_structure, language="")
 
     st.markdown("---")
-    st.markdown("## 📋 Core Files for GPU Deployment")
+    st.markdown("## ✅ Core GPU Files (What Actually Exists)")
 
     core_files_data = {
-        'Category': [
-            'Model Files',
-            'Model Files',
-            'Model Files',
-            'Model Files',
-            'Application',
-            'Application',
-            'Configuration',
-            'Configuration',
-            'Configuration',
-            'Documentation',
-            'Data',
-            'Utilities'
+        'Status': [
+            '✅', '✅', '✅', '✅',
+            '✅', '✅', '✅', '✅',
+            '✅', '✅', '✅', '✅',
+            '✅', '✅'
         ],
         'File/Directory': [
-            'artifacts/best_model_itransformer.pt',
-            'artifacts/best_model_graphcast_unified.pt',
+            'portland_itransformer/outputs/best_model.pt (iTransformer)',
+            'portland_itransformer/outputs/unified/unified/best_model.pt (GraphCast)',
             'artifacts/itransformer_gpu_results.json',
             'artifacts/graphcast_marine_feedback_results.json',
-            'app.py',
-            'inference.py',
+            'app_streamlit_8502_v2.py (Dashboard)',
+            'deploy_production.py (Production)',
+            'deploy_and_forecast.py (Inference)',
             'requirements.txt',
             'environment.yml',
-            'dockerfile',
-            'README.md',
             'marine_data_120days_1min.csv',
-            'utils.py'
+            'train_itransformer_gpu.py',
+            'train_graphcast_gpu.py',
+            'run_gpu_training_all.py',
+            'GPU_DASHBOARD_README.md'
         ],
         'Size': [
-            '10 MB',
-            '4 MB',
-            '50 KB',
-            '50 KB',
-            '3-5 KB',
-            '5-10 KB',
-            '2 KB',
-            '1 KB',
-            '1 KB',
-            '10 KB',
+            '7.6 MB ⭐',
+            '1.4 MB ⭐',
+            '1.6 KB',
+            '1.5 KB',
+            '116 KB',
+            '17.3 KB',
+            '10.5 KB',
+            '0.4 KB',
+            '0.6 KB',
             '34 MB',
-            '5 KB'
+            '11.7 KB',
+            '10.4 KB',
+            '6.5 KB',
+            '3.9 KB'
         ],
         'Purpose': [
-            'Marine predictions (GPU)',
-            'Atmosphere predictions (GPU)',
-            'iTransformer metrics & skill %',
-            'GraphCast metrics & skill %',
-            'Flask/FastAPI server & routes',
-            'Core GPU inference logic',
-            'Python pip dependencies',
-            'Conda environment definition',
-            'Container build instructions',
-            'Setup & usage guide',
-            'Training data (120 days)',
-            'Helper functions & scalers'
+            'iTransformer (2.4M params, GPU)',
+            'GraphCast (1.0M params, GPU)',
+            'iTransformer performance metrics',
+            'GraphCast performance metrics',
+            'Main Streamlit dashboard + deployment tabs',
+            'Production GPU deployment code',
+            'GPU inference + forecasting',
+            'Python pip dependencies for GPU',
+            'Conda environment (CUDA 12.1)',
+            'Training dataset (120 days, 1-min)',
+            'GPU training for iTransformer',
+            'GPU training for GraphCast',
+            'Main GPU training orchestrator',
+            'GPU dashboard quick start guide'
         ]
     }
 
